@@ -1,14 +1,25 @@
 package com.codepath.mypizza;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.codepath.mypizza.fragments.PizzaDetailFragment;
 import com.codepath.mypizza.fragments.PizzaMenuFragment;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity  implements PizzaMenuFragment.OnItemSelectedListener {
 
@@ -65,6 +76,23 @@ public class MainActivity extends AppCompatActivity  implements PizzaMenuFragmen
           .replace(R.id.flContainer, secondFragment) // replace flContainer
           .addToBackStack(null)
           .commit();
+    }
+  }
+
+  //retrieve all View / ViewGroup with BFS
+  public void retrieve(Object object) {
+    Queue<View> queue = new LinkedList<>();
+    View vg = this.getWindow().getDecorView();
+    queue.add(vg);
+
+    while ( !queue.isEmpty()) {
+      vg = queue.remove();
+      Log.d("UUID", object.getClass().getSimpleName() + "/" + vg.getClass().getSimpleName() + "-" + UUID.randomUUID());
+      if (vg instanceof ViewGroup) {
+        for (int i = 0; i < ((ViewGroup)vg).getChildCount(); i++) {
+          queue.add(((ViewGroup)vg).getChildAt(i));
+        }
+      }
     }
   }
 }

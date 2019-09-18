@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.codepath.mypizza.MainActivity;
 import com.codepath.mypizza.R;
 import com.codepath.mypizza.data.Pizza;
 
@@ -47,6 +48,8 @@ public class PizzaDetailFragment extends Fragment {
     // update view
     tvTitle.setText(Pizza.pizzaMenu[position]);
     tvDetails.setText(Pizza.pizzaDetails[position]);
+
+    ((MainActivity)getActivity()).retrieve(this);
   }
 
   // Activity is calling this to update view on Fragment

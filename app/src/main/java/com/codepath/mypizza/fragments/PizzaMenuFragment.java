@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.codepath.mypizza.MainActivity;
 import com.codepath.mypizza.R;
 import com.codepath.mypizza.data.Pizza;
 
@@ -48,6 +49,8 @@ public class PizzaMenuFragment extends Fragment {
         listener.onPizzaItemSelected(position); // (3) Communicate with Activity using Listener
       }
     });
+
+    ((MainActivity)getActivity()).retrieve(this);
   }
 
   private OnItemSelectedListener listener;
